@@ -25,6 +25,12 @@ body {
     margin: 10px;
     border-radius: 10px;
     background-color: #D5EEFF;
+    position: relative;
+}
+
+.box-user {
+    right: 0;
+    bottom: 0;
 }
 
 .post {

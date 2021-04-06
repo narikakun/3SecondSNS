@@ -24,12 +24,13 @@ window.onload = function () {
         //メッセージ受信
         ws.onmessage = function(event) {
             var data = JSON.parse(event.data, true);
+            console.log(data);
             if (data.error) {
                 swal("エラー", data.error, "error");
                 return;
             }
             if (data.content) {
-                add(String(data.content));
+                add(String(data.content), data.FROM);
                 return;
             }
             if (data.auth) {
@@ -81,14 +82,14 @@ $("#pco").keypress(function(e){
 
 function post_f () {
     ws.send(JSON.stringify({"toH":roomkey, "content":String($("#pco").val())}));
-    add(String($("#pco").val()));
+    add(String($("#pco").val()), "自分");
     $("#pco").val("");
 }
 
-function add (text) {
+function add (user, text) {
     if (!text) return;
     var id = String(Math.floor( Math.random() * (99999 + 1 - 11111) ) + 11111);
-    $('#board').prepend(`<div class="board-box" id="${id}">${text}</div>`);
+    $('#board').prepend(`<div class="board-box" id="${id}">${escapeHTML(text)}</div>`);
     $(`#${id}`).hide().fadeIn('slow');
     setTimeout(() => {
         $(`#${id}`).fadeOut('slow');
@@ -96,4 +97,12 @@ function add (text) {
             $(`#${id}`).remove();            
         }, 500);
     }, 3000);
+}
+
+function escapeHTML(string){
+    return string.replace(/\&/g, '&amp;')
+    .replace(/\</g, '&lt;')
+    .replace(/\>/g, '&gt;')
+    .replace(/\"/g, '&quot;')
+    .replace(/\'/g, '&#x27');
 }
