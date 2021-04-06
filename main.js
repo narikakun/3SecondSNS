@@ -23,7 +23,6 @@ window.onload = function () {
         removeLoading();
         //メッセージ受信
         ws.onmessage = function(event) {
-            console.log(event.data);
             var data = JSON.parse(event.data, true);
             if (data.error) {
                 swal("エラー", data.error, "error");
