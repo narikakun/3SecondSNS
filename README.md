@@ -1,2 +1,2 @@
-# 10SecondSNS
-10秒だけ見れるSNSです。
+# 3SecondSNS
+3秒だけ見れるSNSです。
