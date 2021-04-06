@@ -19,7 +19,11 @@ window.onload = function () {
 
     //接続通知
     ws.onopen = function(event) {
-        ws.send(JSON.stringify({"auth":String(Math.floor( Math.random() * (99999 + 1 - 11111) ) + 11111), "passwd":String(Math.floor( Math.random() * (99999 + 1 - 11111) ) + 11111)}));
+        var name = Math.floor( Math.random() * (99999 + 1 - 11111) ) + 11111;
+        if ($.cookie("nickname")) {
+            name = $.cookie("nickname");
+        }
+        ws.send(JSON.stringify({"auth":String(name), "passwd":String(name)}));
         removeLoading();
         //メッセージ受信
         ws.onmessage = function(event) {
@@ -80,8 +84,29 @@ $("#pco").keypress(function(e){
 });
 
 function post_f () {
-    ws.send(JSON.stringify({"toH":roomkey, "content":String($("#pco").val())}));
-    add(String($("#pco").val()), "自分");
+    var content = String($("#pco").val());
+    if (content.startsWith("setnick:")) {
+        var nick_ = content.replace("setnick:");
+        if (nick_ == "") {
+            swal({
+                title: "エラー",
+                text: "ニックネームを空白にすることは出来ません。",
+                icon: "error",
+            });
+            return;
+        }
+        $.cookie("nickname", nick_, { expires: 360, path: '/3SecondSNS/',domain: 'narikakun.github.io', secure: true });
+        swal({
+            title: "成功",
+            text: "変更に成功したよ！",
+            icon: "success",
+        }).then((value) => {
+            location.reload();
+        });
+        return;
+    }
+    ws.send(JSON.stringify({"toH":roomkey, "content":content}));
+    add(content, "自分");
     $("#pco").val("");
 }
 
