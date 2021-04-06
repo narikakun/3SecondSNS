@@ -86,7 +86,8 @@ $("#pco").keypress(function(e){
 function post_f () {
     var content = String($("#pco").val());
     if (content.startsWith("setnick:")) {
-        var nick_ = content.replace("setnick:");
+        var nick_ = "";
+        nick_ = content.replace("setnick:", "");
         if (nick_ == "") {
             swal({
                 title: "エラー",
