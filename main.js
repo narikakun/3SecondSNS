@@ -89,7 +89,7 @@ function post_f () {
 function add (text, user) {
     if (!text) return;
     var id = String(Math.floor( Math.random() * (99999 + 1 - 11111) ) + 11111);
-    $('#board').prepend(`<div class="board-box" id="${id}">${escapeHTML(text)}</div>`);
+    $('#board').prepend(`<div class="board-box" id="${id}">${escapeHTML(text)}<span class="box-user">${user}</span></div>`);
     $(`#${id}`).hide().fadeIn('slow');
     setTimeout(() => {
         $(`#${id}`).fadeOut('slow');
