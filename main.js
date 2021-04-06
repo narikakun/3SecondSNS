@@ -86,7 +86,7 @@ function post_f () {
     $("#pco").val("");
 }
 
-function add (user, text) {
+function add (text, user) {
     if (!text) return;
     var id = String(Math.floor( Math.random() * (99999 + 1 - 11111) ) + 11111);
     $('#board').prepend(`<div class="board-box" id="${id}">${escapeHTML(text)}</div>`);
