@@ -89,7 +89,11 @@ function add (text) {
     if (!text) return;
     var id = String(Math.floor( Math.random() * (99999 + 1 - 11111) ) + 11111);
     $('#board').prepend(`<div class="board-box" id="${id}">${text}</div>`);
+    $(`#${id}`).hide().fadeIn('slow');
     setTimeout(() => {
-        $(`#${id}`).remove();
+        $(`#${id}`).fadeOut('slow');
+        setTimeout(() => {
+            $(`#${id}`).remove();            
+        }, 500);
     }, 3000);
 }
