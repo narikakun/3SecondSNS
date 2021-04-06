@@ -92,5 +92,5 @@ function add (text) {
     $('#board').prepend(`<div class="board-box" id="${id}">${text}</div>`);
     setTimeout(() => {
         $(`#${id}`).remove();
-    }, 10000);
+    }, 3000);
 }

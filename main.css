@@ -6,6 +6,8 @@ body {
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
     overflow: hidden;
+    background-color: #1B435D;
+    color: black;
 }
 
 .board {
@@ -18,9 +20,11 @@ body {
 
 .board-box {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    width: 97%;
-    padding: 5px;
-    margin: 5px;
+    width: 95%;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #D5EEFF;
 }
 
 .post {
